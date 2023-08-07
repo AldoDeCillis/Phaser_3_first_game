@@ -22,6 +22,7 @@ window.onload = function () {
         this.load.image('background', 'public/assets/background.jpg');
         this.load.image('star', 'public/assets/star.png');
         this.load.image('platform', 'public/assets/platform.png')
+        this.load.image('bomb', 'public/assets/bomb.png')
         this.load.spritesheet('dude', 'public/assets/dude.png', { frameWidth: 32, frameHeight: 48 });
     }
     function create() {
@@ -63,12 +64,32 @@ window.onload = function () {
             star.disableBody(true, true);
             score += 10;
             scoreText.setText('Score: ' + score);
+
+            let x = (player.x < 400) ? Phaser.Math.Between(400,800) : Phaser.Math.Between(0,400);
+            let bomb = bombs.create(x, 16, 'bomb');
+            bomb.setBounce(1);
+            bomb.setCollideWorldBounds(true);
+            bomb.setVelocity(Phaser.Math.Between(-200, 200),20);
+        }
+
+
+        // Enemy:
+        bombs = this.physics.add.group();
+
+        function hitBomb(player, bomb)
+        {
+            this.physics.pause();
+            player.setTint(0xff0000);
+            player.anims.play('turn');
+            gameOver = true;
         }
 
 
         //colliders
         this.physics.add.collider(stars, platforms);
         this.physics.add.collider(player, platforms);
+        this.physics.add.collider(bombs, platforms);
+        this.physics.add.collider(player, bombs, hitBomb, null, this);
 
 
 
