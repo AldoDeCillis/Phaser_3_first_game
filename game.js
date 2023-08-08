@@ -130,8 +130,15 @@ window.onload = function () {
             frameRate: 10,
             repeat: -1
         })
+        this.anims.create({
+            key: 'jumpRight',
+            frames: this.anims.generateFrameNumbers('dude', { start: 42, end: 47 }),
+            frameRate: 10,
+            repeat: 'no-repeat'
+        })
         cursor = this.input.keyboard.createCursorKeys();
     }
+    let isJumping = false;
     function update() {
         if (cursor.left.isDown) {
             if (cursor.shift.isDown) {
@@ -150,13 +157,24 @@ window.onload = function () {
                 player.anims.play('right', true);
             }
         } else {
-            player.anims.play('turn', true);
+            if (cursor.up.isDown) {
+                if (!isJumping) {
+                    player.anims.play('jumpRight', true);
+                    isJumping = true;
+                }
+            } else {
+                player.anims.play('turn', true);
+            }
             player.setVelocityX(0);
 
         }
 
         if (cursor.up.isDown && player.body.touching.down) {
-            player.setVelocityY(-150);
+
+            player.setVelocityY(-500);
+        }
+        if (!cursor.up.isDown) {
+            isJumping = false; // Resetta la variabile quando il tasto "up" non è premuto
         }
 
         if (score >= 120) {
