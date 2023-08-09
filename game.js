@@ -168,7 +168,7 @@ window.onload = function () {
 
         if (cursor.up.isDown && player.body.touching.down) {
 
-            player.setVelocityY(-500);
+            player.setVelocityY(-160);
         }
         if (!cursor.up.isDown) {
             isJumping = false; // Resetta la variabile quando il tasto "up" non è premuto
