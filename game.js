@@ -18,13 +18,8 @@ window.onload = function () {
     }
     let game = new Phaser.Game(config);
 
-<<<<<<< Updated upstream
     let bombCount = 0;
     let score = 0;
-=======
-    let score = 0;
-    let bombCount = 0;
->>>>>>> Stashed changes
 
     function preload() {
         this.load.image('background', 'public/assets/background.jpg');
@@ -36,15 +31,10 @@ window.onload = function () {
 
     function create() {
         //Score Texts:
-<<<<<<< Updated upstream
 
         let scoreText;
 
         scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
-=======
-        let scoreText;
-        scoreText = this.add.text(16,16, 'score: 0', {fontSize: '32px', fill: '#fff'});
->>>>>>> Stashed changes
 
         //Victory Text
         let victoryText;
@@ -75,7 +65,6 @@ window.onload = function () {
             score += 10;
             scoreText.setText('Score: ' + score);
 
-<<<<<<< Updated upstream
             spawnBomb(player)
 
         }
@@ -88,15 +77,6 @@ window.onload = function () {
                 bomb.setCollideWorldBounds(true);
                 bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
                 bombCount++;
-=======
-            if (bombCount < 2){
-            let x = (player.x < 400) ? Phaser.Math.Between(400,800) : Phaser.Math.Between(0,400);
-            let bomb = bombs.create(x, 0, 'bomb');
-            bomb.setBounce(1);
-            bomb.setCollideWorldBounds(true);
-            bomb.setVelocity(Phaser.Math.Between(-200, 200),20);
-            bombCount ++;
->>>>>>> Stashed changes
             }
         }
 
@@ -116,11 +96,7 @@ window.onload = function () {
         this.physics.add.collider(bombs, platforms);
         this.physics.add.collider(player, bombs, hitBomb, null, this);
 
-<<<<<<< Updated upstream
-
-=======
         //Creazione Animazioni
->>>>>>> Stashed changes
         this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('dude', { start: 7, end: 0 }),
@@ -158,11 +134,7 @@ window.onload = function () {
         })
         cursor = this.input.keyboard.createCursorKeys();
     }
-<<<<<<< Updated upstream
     let isJumping = false;
-=======
-    
->>>>>>> Stashed changes
     function update() {
         if (cursor.left.isDown) {
             if (cursor.shift.isDown) {
