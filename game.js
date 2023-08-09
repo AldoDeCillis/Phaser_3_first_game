@@ -20,6 +20,7 @@ window.onload = function () {
 
     let bombCount = 0;
     let score = 0;
+    let isJumping = false;
 
     function preload() {
         this.load.image('background', 'public/assets/background.jpg');
@@ -134,7 +135,7 @@ window.onload = function () {
         })
         cursor = this.input.keyboard.createCursorKeys();
     }
-    let isJumping = false;
+    
     function update() {
         if (cursor.left.isDown) {
             if (cursor.shift.isDown) {
@@ -171,11 +172,6 @@ window.onload = function () {
         }
         if (!cursor.up.isDown) {
             isJumping = false; // Resetta la variabile quando il tasto "up" non è premuto
-        }
-
-        if (score >= 120) {
-            victoryText = this.add.text(250, 300, 'HAI VINTO', { fontSize: '32px', fill: '#fff' });
-            this.physics.pause()
         }
 
         if(score >= 120)
